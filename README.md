@@ -40,7 +40,6 @@ Thay vì lưu trực tiếp dữ liệu nhị phân của ảnh vào database, �
 
 ## 3. Cấu trúc thư mục
 
-```text
 cloudinary-image-optimization/
 ├── config/
 │   └── cloudinary.js
@@ -59,7 +58,6 @@ cloudinary-image-optimization/
 ├── package-lock.json
 ├── README.md
 └── server.js
-```
 
 ## 4. Yêu cầu trước khi cài đặt
 
@@ -85,72 +83,16 @@ Các thông tin cần thiết:
 
 ## 5. Hướng dẫn cài đặt
 
-### Bước 1: Khởi tạo project
-
-Mở terminal tại thư mục muốn lưu dự án:
-
-```bash
-mkdir cloudinary-image-optimization
-cd cloudinary-image-optimization
-npm init -y
-```
-
-### Bước 2: Cài đặt thư viện
-
-```bash
-npm install express cloudinary dotenv multer
-npm install --save-dev nodemon
-```
-
-### Bước 3: Cấu hình ES Module
-
-Trong `package.json`, bổ sung `"type": "module"` và các script:
-
-```json
-{
-  "type": "module",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  }
-}
-```
-
-Giữ nguyên những trường khác được tạo bởi npm.
-
-ES Module cho phép sử dụng cú pháp:
-
-```javascript
-import express from "express";
-export default router;
-```
-
-Khi import file nội bộ trong Node.js, cần ghi đầy đủ phần mở rộng `.js`.
+Sau khi clone git về thì nhập lệnh `npm install` để cài đặt các thư viện trong package
 
 ### Bước 4: Cấu hình biến môi trường
 
 Tạo file `.env` tại thư mục gốc:
 
-```env
 CLOUDINARY_URL=cloudinary://API_KEY:API_SECRET@CLOUD_NAME
 PORT=3000
-```
 
 Thay các giá trị mẫu bằng thông tin tài khoản Cloudinary của bạn.
-
-Tạo thêm `.env.example` để chia sẻ source code:
-
-```env
-CLOUDINARY_URL=
-PORT=3000
-```
-
-Tạo file `.gitignore`:
-
-```gitignore
-node_modules/
-.env
-```
 
 ### Bước 5: Hoàn thiện source code
 

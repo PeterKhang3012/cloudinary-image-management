@@ -24,11 +24,11 @@ export async function uploadAndOptimizeImage(file) {
   // Tạo URL ảnh tối ưu
   const optimizedUrl = cloudinary.url(result.public_id, {
     width: 400,
-    height: 400,
+    height: 200,
     crop: "fill",
     gravity: "auto",
-    fetch_format: "auto",
-    quality: "auto",
+    fetch_format: "jpg",
+    quality: "auto:low",
     secure: true
   });
 
@@ -46,7 +46,7 @@ export async function uploadAndOptimizeImage(file) {
     optimized: {
       url: optimizedUrl,
       width: 400,
-      height: 400
+      height: 200
     }
   };
 }
