@@ -23,14 +23,30 @@ export async function uploadAndOptimizeImage(file) {
 
   // Tạo URL ảnh tối ưu
   const optimizedUrl = cloudinary.url(result.public_id, {
-    width: 400,
+    width: 0.5,
     height: 200,
     crop: "fill",
     gravity: "auto",
-    fetch_format: "jpg",
     quality: "auto:low",
     secure: true
   });
+
+  const urls = {
+  jpeg: cloudinary.url(result.public_id, {
+    ...optimizedUrl,
+    format: "jpg"
+  }),
+
+  png: cloudinary.url(result.public_id, {
+    ...optimizedUrl,
+    format: "png"
+  }),
+
+  webp: cloudinary.url(result.public_id, {
+    ...optimizedUrl,
+    format: "webp"
+  })
+};
 
   return {
     publicId: result.public_id,
@@ -44,9 +60,8 @@ export async function uploadAndOptimizeImage(file) {
     },
 
     optimized: {
-      url: optimizedUrl,
-      width: 400,
-      height: 200
+    widthRatio: 0.5,
+    urls
     }
   };
 }
