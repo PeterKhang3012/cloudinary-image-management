@@ -61,6 +61,7 @@ export async function uploadAndOptimizeImage(file) {
 
     optimized: {
       widthRatio: 0.5,
+      heightRatio: 0.5,
       urls
     }
   };
