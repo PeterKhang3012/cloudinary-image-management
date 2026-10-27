@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import {cloudinary} from "../config/cloudinary.js";
+import { cloudinary } from "../config/cloudinary.js";
 
 export async function uploadAndOptimizeImage(file) {
   // Upload buffer lên Cloudinary
@@ -21,32 +21,32 @@ export async function uploadAndOptimizeImage(file) {
     stream.end(file.buffer);
   });
 
-  // Tạo URL ảnh tối ưu
-  const optimizedUrl = cloudinary.url(result.public_id, {
+  // Options tối ưu: là object, không phải URL
+  const transformOptions = {
     width: 0.5,
-    height: 200,
+    height: 0.5,
     crop: "fill",
     gravity: "auto",
     quality: "auto:low",
     secure: true
-  });
+  };
 
   const urls = {
-  jpeg: cloudinary.url(result.public_id, {
-    ...optimizedUrl,
-    format: "jpg"
-  }),
+    jpeg: cloudinary.url(result.public_id, {
+      ...transformOptions,
+      format: "jpg"
+    }),
 
-  png: cloudinary.url(result.public_id, {
-    ...optimizedUrl,
-    format: "png"
-  }),
+    png: cloudinary.url(result.public_id, {
+      ...transformOptions,
+      format: "png"
+    }),
 
-  webp: cloudinary.url(result.public_id, {
-    ...optimizedUrl,
-    format: "webp"
-  })
-};
+    webp: cloudinary.url(result.public_id, {
+      ...transformOptions,
+      format: "webp"
+    })
+  };
 
   return {
     publicId: result.public_id,
@@ -60,8 +60,8 @@ export async function uploadAndOptimizeImage(file) {
     },
 
     optimized: {
-    widthRatio: 0.5,
-    urls
+      widthRatio: 0.5,
+      urls
     }
   };
 }
